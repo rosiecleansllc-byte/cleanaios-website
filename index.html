@@ -1035,6 +1035,12 @@ footer {
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Build email link at runtime (bypasses Cloudflare email protection)
+(function(){
+  var e = document.getElementById('footer-email');
+  if(e){ var m = 'hello' + '@' + 'cleanaios.com'; e.href = 'mailto:' + m; e.textContent = m; }
+})();
+
 // Nav scroll effect
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
