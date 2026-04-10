@@ -9,254 +9,65 @@
 <style>
 :root {
   --teal: #75d3df;
-  --teal-light: #8ddde7;
   --teal-pale: rgba(117,211,223,0.10);
   --teal-line: rgba(117,211,223,0.25);
-  --ink: #0c0b09;
+  --ink: #111111;
   --ink-soft: #1a1814;
-  --paper: #ffffff;
-  --cream: #f4f4f4;
   --muted: #666666;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Instrument Sans', sans-serif; background: #ffffff; color: var(--ink); }
+body { font-family: "Instrument Sans", sans-serif; background: #ffffff; color: var(--ink); }
 
-/* HERO */
-.hero {
-  background: var(--ink-soft);
-  padding: 56px 48px 48px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 20% 50%, var(--teal-pale) 0%, transparent 65%);
-  pointer-events: none;
-}
+.hero { background: var(--ink-soft); padding: 56px 48px 48px; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 50%, var(--teal-pale) 0%, transparent 65%); pointer-events: none; }
 .hero-inner { position: relative; max-width: 680px; }
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--teal-pale);
-  border: 1px solid var(--teal-line);
-  border-radius: 100px;
-  padding: 6px 14px;
-  margin-bottom: 28px;
-}
-.badge-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--teal);
-  animation: pulse 2s infinite;
-}
-.badge-text {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--teal);
-  font-weight: 500;
-}
-.hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 300;
-  color: #f5f0e8;
-  margin: 0 0 16px;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-.hero h1 span { font-style: italic; color: var(--teal); font-weight: 400; }
+.badge { display: inline-flex; align-items: center; gap: 8px; background: var(--teal-pale); border: 1px solid var(--teal-line); border-radius: 100px; padding: 6px 14px; margin-bottom: 28px; }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
+.badge-text { font-family: "DM Mono", monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); font-weight: 500; }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(32px, 5vw, 52px); font-weight: 300; color: #f5f0e8; margin: 0 0 16px; line-height: 1.1; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: var(--teal); font-weight: 400; }
 .hero p { font-size: 16px; color: #7a7060; line-height: 1.7; max-width: 480px; }
 
-/* DOCS ROW */
-.docs-row {
-  background: #f4f4f4;
-  padding: 32px 48px;
-  border-bottom: 1px solid #e8e8e8;
-}
-.docs-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 680px;
-}
-.doc-card {
-  background: #ffffff;
-  border: 1px solid #e8e8e8;
-  border-top: 3px solid var(--teal);
-  border-radius: 0 0 8px 8px;
-  padding: 16px;
-}
+.docs-row { background: #f4f4f4; padding: 32px 48px; border-bottom: 1px solid #e8e8e8; }
+.docs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 680px; }
+.doc-card { background: #ffffff; border: 1px solid #e8e8e8; border-top: 3px solid var(--teal); border-radius: 0 0 8px 8px; padding: 16px; }
 .doc-icon { font-size: 20px; margin-bottom: 8px; }
 .doc-label { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
 .doc-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
-/* STEPS */
 .steps-wrap { padding: 48px; max-width: 728px; }
-.steps-eyebrow {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 32px;
-}
-.step {
-  margin-bottom: 16px;
-  border: 1px solid #e4e4e4;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #fafafa;
-  transition: all 0.2s;
-  cursor: pointer;
-}
-.step.open {
-  border-color: var(--teal);
-  background: #ffffff;
-  box-shadow: 0 4px 20px rgba(117,211,223,0.12);
-}
-.step-header {
-  padding: 20px 24px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.step-num {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: var(--cream);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
-  flex-shrink: 0;
-  transition: all 0.2s;
-}
+.steps-eyebrow { font-family: "DM Mono", monospace; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--teal); margin-bottom: 32px; }
+
+.step { margin-bottom: 16px; border: 1px solid #e4e4e4; border-radius: 8px; overflow: hidden; background: #fafafa; transition: all 0.2s; cursor: pointer; }
+.step.open { border-color: var(--teal); background: #ffffff; box-shadow: 0 4px 20px rgba(117,211,223,0.12); }
+.step-header { padding: 20px 24px; display: flex; align-items: center; gap: 20px; user-select: none; }
+.step-num { width: 36px; height: 36px; border-radius: 50%; background: #eeeeee; display: flex; align-items: center; justify-content: center; font-family: "DM Mono", monospace; font-size: 12px; font-weight: 700; color: var(--muted); flex-shrink: 0; transition: all 0.2s; }
 .step.open .step-num { background: var(--teal); color: var(--ink); }
 .step-title { font-size: 15px; font-weight: 500; color: var(--ink); }
-.step-time {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 2px;
-  letter-spacing: 0.05em;
-}
-.step-chevron { color: #c8c0b0; font-size: 16px; margin-left: auto; transition: transform 0.2s; }
+.step-time { font-family: "DM Mono", monospace; font-size: 11px; color: var(--muted); margin-top: 2px; }
+.step-chevron { color: #cccccc; font-size: 16px; margin-left: auto; transition: transform 0.2s; flex-shrink: 0; }
 .step.open .step-chevron { transform: rotate(180deg); color: var(--teal); }
-.step-body {
-  display: none;
-  border-top: 1px solid var(--cream);
-  padding: 20px 24px 24px;
-}
+.step-body { display: none; border-top: 1px solid #eeeeee; padding: 20px 24px 24px; }
 .step.open .step-body { display: block; }
 .step-desc { font-size: 14px; color: #333333; line-height: 1.75; margin-bottom: 16px; }
-.tip {
-  background: #f4f9fa;
-  border-left: 3px solid var(--teal);
-  padding: 12px 16px;
-  border-radius: 0 4px 4px 0;
-  margin-bottom: 16px;
-}
-.tip-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--teal);
-  display: block;
-  margin-bottom: 4px;
-}
+.tip { background: #f4f9fa; border-left: 3px solid var(--teal); padding: 12px 16px; border-radius: 0 4px 4px 0; margin-bottom: 16px; }
+.tip-label { font-family: "DM Mono", monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); display: block; margin-bottom: 4px; }
 .tip-text { font-size: 13px; color: #444444; line-height: 1.6; }
-.btn-dark {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--ink-soft);
-  color: #f5f0e8;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-  letter-spacing: 0.02em;
-  margin-top: 16px;
-}
-.btn-outline {
-  background: transparent;
-  border: 1px solid #e4e4e4;
-  color: #444444;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-size: 13px;
-  cursor: pointer;
-  margin-right: 10px;
-  font-family: inherit;
-}
-.btn-copy {
-  background: var(--ink-soft);
-  border: none;
-  color: #f5f0e8;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-}
+.btn-dark { display: inline-flex; align-items: center; background: var(--ink-soft); color: #f5f0e8; padding: 10px 20px; border-radius: 4px; font-size: 13px; font-weight: 500; text-decoration: none; margin-top: 16px; }
+.btn-outline { background: transparent; border: 1px solid #dddddd; color: #555555; padding: 10px 20px; border-radius: 4px; font-size: 13px; cursor: pointer; margin-right: 10px; font-family: inherit; }
+.btn-copy { background: var(--ink-soft); border: none; color: #f5f0e8; padding: 10px 20px; border-radius: 4px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: inherit; }
 .btn-copy.copied { background: var(--teal); color: var(--ink); }
-.prompt-box {
-  display: none;
-  margin-top: 16px;
-  background: var(--ink-soft);
-  border-radius: 6px;
-  padding: 20px;
-  max-height: 280px;
-  overflow-y: auto;
-}
+.prompt-box { display: none; margin-top: 16px; background: var(--ink-soft); border-radius: 6px; padding: 20px; max-height: 280px; overflow-y: auto; }
 .prompt-box.visible { display: block; }
-.prompt-box pre {
-  font-size: 11px;
-  color: #a09080;
-  line-height: 1.7;
-  white-space: pre-wrap;
-  font-family: monospace;
-}
+.prompt-box pre { font-size: 11px; color: #a09080; line-height: 1.7; white-space: pre-wrap; font-family: monospace; margin: 0; }
 
-/* FOOTER CARD */
-.footer-card {
-  margin-top: 40px;
-  padding: 24px 28px;
-  background: var(--ink-soft);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.footer-icon {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: var(--teal-pale);
-  border: 1px solid var(--teal-line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  flex-shrink: 0;
-}
+.footer-card { margin-top: 40px; padding: 24px 28px; background: var(--ink-soft); border-radius: 8px; display: flex; align-items: center; gap: 20px; }
+.footer-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--teal-pale); border: 1px solid var(--teal-line); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
 .footer-label { font-size: 13px; font-weight: 600; color: #f5f0e8; margin-bottom: 4px; }
-.footer-link { font-size: 13px; color: #7a7060; }
-.footer-link a { color: var(--teal); text-decoration: none; }
+.footer-sub { font-size: 13px; color: #7a7060; }
+.footer-sub a { color: var(--teal); text-decoration: none; }
 
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
 @media (max-width: 600px) {
   .hero { padding: 40px 24px 36px; }
   .docs-row { padding: 24px; }
@@ -269,40 +80,25 @@ body { font-family: 'Instrument Sans', sans-serif; background: #ffffff; color: v
 
 <div class="hero">
   <div class="hero-inner">
-    <div class="badge">
-      <div class="badge-dot"></div>
-      <span class="badge-text">CleanAIOS · QuickStart</span>
-    </div>
-    <h1>Let's build your<br><span>AI foundation</span> in<br>20 minutes.</h1>
+    <div class="badge"><div class="badge-dot"></div><span class="badge-text">CleanAIOS · QuickStart</span></div>
+    <h1>Let's build your<br><em>AI foundation</em> in<br>20 minutes.</h1>
     <p>Five steps. No tech experience needed. By the end you'll have three documents that power everything you build inside CleanAIOS.</p>
   </div>
 </div>
 
 <div class="docs-row">
   <div class="docs-grid">
-    <div class="doc-card">
-      <div class="doc-icon">📋</div>
-      <div class="doc-label">Business Profile</div>
-      <div class="doc-desc">Who you are, what you offer, where you operate — in your own words.</div>
-    </div>
-    <div class="doc-card">
-      <div class="doc-icon">👤</div>
-      <div class="doc-label">Ideal Client Persona</div>
-      <div class="doc-desc">Your best client — named, profiled, and ready to guide every message you send.</div>
-    </div>
-    <div class="doc-card">
-      <div class="doc-icon">🎙️</div>
-      <div class="doc-label">Brand Voice Guide</div>
-      <div class="doc-desc">How you sound — plus two ready-to-use text templates in your voice.</div>
-    </div>
+    <div class="doc-card"><div class="doc-icon">📋</div><div class="doc-label">Business Profile</div><div class="doc-desc">Who you are, what you offer, where you operate — in your own words.</div></div>
+    <div class="doc-card"><div class="doc-icon">👤</div><div class="doc-label">Ideal Client Persona</div><div class="doc-desc">Your best client — named, profiled, and ready to guide every message you send.</div></div>
+    <div class="doc-card"><div class="doc-icon">🎙️</div><div class="doc-label">Brand Voice Guide</div><div class="doc-desc">How you sound — plus two ready-to-use text templates in your voice.</div></div>
   </div>
 </div>
 
 <div class="steps-wrap">
   <div class="steps-eyebrow">Your Five Steps</div>
 
-  <div class="step" onclick="toggleStep(this)">
-    <div class="step-header">
+  <div class="step" id="step1">
+    <div class="step-header" onclick="toggleStep('step1')">
       <div class="step-num">01</div>
       <div><div class="step-title">Create Your Free Claude Account</div><div class="step-time">2 min</div></div>
       <span class="step-chevron">▾</span>
@@ -314,8 +110,8 @@ body { font-family: 'Instrument Sans', sans-serif; background: #ffffff; color: v
     </div>
   </div>
 
-  <div class="step" onclick="toggleStep(this)">
-    <div class="step-header">
+  <div class="step" id="step2">
+    <div class="step-header" onclick="toggleStep('step2')">
       <div class="step-num">02</div>
       <div><div class="step-title">Create a New Project</div><div class="step-time">1 min</div></div>
       <span class="step-chevron">▾</span>
@@ -326,8 +122,8 @@ body { font-family: 'Instrument Sans', sans-serif; background: #ffffff; color: v
     </div>
   </div>
 
-  <div class="step" onclick="toggleStep(this)">
-    <div class="step-header">
+  <div class="step" id="step3">
+    <div class="step-header" onclick="toggleStep('step3')">
       <div class="step-num">03</div>
       <div><div class="step-title">Paste Your QuickStart Prompt</div><div class="step-time">1 min</div></div>
       <span class="step-chevron">▾</span>
@@ -341,8 +137,8 @@ body { font-family: 'Instrument Sans', sans-serif; background: #ffffff; color: v
     </div>
   </div>
 
-  <div class="step" onclick="toggleStep(this)">
-    <div class="step-header">
+  <div class="step" id="step4">
+    <div class="step-header" onclick="toggleStep('step4')">
       <div class="step-num">04</div>
       <div><div class="step-title">Start Your Interview</div><div class="step-time">15–20 min</div></div>
       <span class="step-chevron">▾</span>
@@ -353,8 +149,8 @@ body { font-family: 'Instrument Sans', sans-serif; background: #ffffff; color: v
     </div>
   </div>
 
-  <div class="step" onclick="toggleStep(this)">
-    <div class="step-header">
+  <div class="step" id="step5">
+    <div class="step-header" onclick="toggleStep('step5')">
       <div class="step-num">05</div>
       <div><div class="step-title">Save Your Three Documents</div><div class="step-time">2 min</div></div>
       <span class="step-chevron">▾</span>
@@ -369,121 +165,25 @@ body { font-family: 'Instrument Sans', sans-serif; background: #ffffff; color: v
     <div class="footer-icon">✉️</div>
     <div>
       <div class="footer-label">Questions? We're here.</div>
-      <div class="footer-link">Reach out anytime at <a href="/cdn-cgi/l/email-protection#89e1ece5e5e6afaabfbdb2eae5ece8e7e8e0e6faa7eae6e4">hello&#64;cleanaios.com</a></div>
+      <div class="footer-sub">Reach out anytime at <a id="qs-email" href="#">hello@cleanaios.com</a></div>
     </div>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const SYSTEM_PROMPT = `You are the CleanAIOS QuickStart assistant — a warm, focused onboarding guide for residential cleaning business owners.
+<script>
+var SYSTEM_PROMPT = "You are the CleanAIOS QuickStart assistant \u2014 a warm, focused onboarding guide for residential cleaning business owners.\n\nYour job is to conduct a friendly 15\u201320 minute interview that feels like a conversation with someone who genuinely understands the cleaning business \u2014 not a form, not a survey.\n\nYou will ask questions one at a time, listen carefully to each answer, and when the interview is complete, produce three foundation documents the client will use throughout their CleanAIOS program.\n\n---\nINTERVIEW FLOW\n\nIntroduce yourself warmly, then move through these questions naturally \u2014 one at a time. Don't rush. Don't stack questions.\n\nSECTION 1 \u2014 THE BUSINESS (5 questions)\n1. What's the name of your cleaning business, and how long have you been running it?\n2. What areas do you serve \u2014 city, county, or region?\n3. What services do you offer? (recurring, deep clean, move-in/out, Airbnb, etc.)\n4. How are you currently priced \u2014 hourly, flat rate, or custom per job?\n5. How do most of your leads find you right now?\n\nSECTION 2 \u2014 THE CLIENT (4 questions)\n6. Describe your best current client \u2014 what kind of home, what kind of person, what do they care about?\n7. Why do clients choose you over another cleaner?\n8. What does a client say when they refer you to someone?\n9. Is there a type of client you've learned isn't a good fit for you?\n\nSECTION 3 \u2014 THE VOICE (3 questions)\n10. When you text or email a new lead, what tone do you naturally use \u2014 warm and personal, professional and direct, or something else?\n11. Is there anything you never want to sound like in your communications?\n12. If your business had a personality, how would you describe it in three words?\n\n---\nOUTPUT DOCUMENTS\n\nOnce all 12 questions are answered, say:\n\"Perfect \u2014 I have everything I need. Give me just a moment and I'll build your three CleanAIOS foundation documents.\"\n\nThen produce all three documents in this exact format:\n\n---\n\n# CleanAIOS \u2014 YOUR BUSINESS PROFILE\n\n**Business Name:** [name]\n**Operating Since:** [year/duration]\n**Service Area:** [areas]\n**Services Offered:** [list]\n**Pricing Model:** [model]\n**Primary Lead Sources:** [sources]\n\n**One-Line Business Summary:**\n[Write a single clear sentence that describes what they do, who they serve, and where \u2014 in their voice.]\n\n---\n\n# CleanAIOS \u2014 YOUR IDEAL CLIENT PERSONA\n\n**Name:** [give the persona a first name that fits the demographic]\n**Profile:** [2\u20133 sentences describing who this person is \u2014 home type, life situation, values]\n**Why They Hire:** [what drives them to hire a cleaner vs. doing it themselves]\n**What They Care About Most:** [top 2\u20133 priorities when choosing a cleaner]\n**What Makes Them Stay:** [why they become recurring clients]\n**Who Isn't a Fit:** [the client type to avoid and why]\n**How They Find You:** [primary discovery channels]\n\n---\n\n# CleanAIOS \u2014 YOUR BRAND VOICE GUIDE\n\n**Tone:** [warm/professional/direct \u2014 based on their answers]\n**Three Brand Words:** [their exact words from Q12]\n\n**You Sound Like:**\n[2\u20133 sentences describing the voice \u2014 use specific language from their answers]\n\n**You Never Sound Like:**\n[1\u20132 sentences on what to avoid \u2014 based on Q11]\n\n**Sample Welcome Text (use this when a new lead comes in):**\n[Write a short, natural SMS in their voice \u2014 2\u20133 sentences max. No emojis unless they mentioned using them.]\n\n**Sample Follow-Up Text (use this 24 hours after no response):**\n[Write a short follow-up in their voice \u2014 1\u20132 sentences, no pressure.]\n\n---\n\nAfter delivering the documents, say:\n\"These are your CleanAIOS foundation files. Save them somewhere you can find them \u2014 you'll bring them to every session.\n\nYour next step is Session 1 with Cecilia. She'll walk you through what these documents mean for your specific business and how to start putting the system to work.\n\nSee you inside CleanAIOS.\"\n\n---\nTONE RULES\n- Always warm, never clinical\n- React to answers before asking the next question (\"That's really common for solo operators.\" / \"That tells me a lot about your positioning.\")\n- Never ask two questions at once\n- If an answer is vague, gently ask for one specific example\n- Never rush \u2014 this conversation sets the tone for the entire engagement";
 
-Your job is to conduct a friendly 15–20 minute interview that feels like a conversation with someone who genuinely understands the cleaning business — not a form, not a survey.
-
-You will ask questions one at a time, listen carefully to each answer, and when the interview is complete, produce three foundation documents the client will use throughout their CleanAIOS program.
-
----
-INTERVIEW FLOW
-
-Introduce yourself warmly, then move through these questions naturally — one at a time. Don't rush. Don't stack questions.
-
-SECTION 1 — THE BUSINESS (5 questions)
-1. What's the name of your cleaning business, and how long have you been running it?
-2. What areas do you serve — city, county, or region?
-3. What services do you offer? (recurring, deep clean, move-in/out, Airbnb, etc.)
-4. How are you currently priced — hourly, flat rate, or custom per job?
-5. How do most of your leads find you right now?
-
-SECTION 2 — THE CLIENT (4 questions)
-6. Describe your best current client — what kind of home, what kind of person, what do they care about?
-7. Why do clients choose you over another cleaner?
-8. What does a client say when they refer you to someone?
-9. Is there a type of client you've learned isn't a good fit for you?
-
-SECTION 3 — THE VOICE (3 questions)
-10. When you text or email a new lead, what tone do you naturally use — warm and personal, professional and direct, or something else?
-11. Is there anything you never want to sound like in your communications?
-12. If your business had a personality, how would you describe it in three words?
-
----
-OUTPUT DOCUMENTS
-
-Once all 12 questions are answered, say:
-"Perfect — I have everything I need. Give me just a moment and I'll build your three CleanAIOS foundation documents."
-
-Then produce all three documents in this exact format:
-
----
-
-# CleanAIOS — YOUR BUSINESS PROFILE
-
-**Business Name:** [name]
-**Operating Since:** [year/duration]
-**Service Area:** [areas]
-**Services Offered:** [list]
-**Pricing Model:** [model]
-**Primary Lead Sources:** [sources]
-
-**One-Line Business Summary:**
-[Write a single clear sentence that describes what they do, who they serve, and where — in their voice.]
-
----
-
-# CleanAIOS — YOUR IDEAL CLIENT PERSONA
-
-**Name:** [give the persona a first name that fits the demographic]
-**Profile:** [2–3 sentences describing who this person is — home type, life situation, values]
-**Why They Hire:** [what drives them to hire a cleaner vs. doing it themselves]
-**What They Care About Most:** [top 2–3 priorities when choosing a cleaner]
-**What Makes Them Stay:** [why they become recurring clients]
-**Who Isn't a Fit:** [the client type to avoid and why]
-**How They Find You:** [primary discovery channels]
-
----
-
-# CleanAIOS — YOUR BRAND VOICE GUIDE
-
-**Tone:** [warm/professional/direct — based on their answers]
-**Three Brand Words:** [their exact words from Q12]
-
-**You Sound Like:**
-[2–3 sentences describing the voice — use specific language from their answers]
-
-**You Never Sound Like:**
-[1–2 sentences on what to avoid — based on Q11]
-
-**Sample Welcome Text (use this when a new lead comes in):**
-[Write a short, natural SMS in their voice — 2–3 sentences max. No emojis unless they mentioned using them.]
-
-**Sample Follow-Up Text (use this 24 hours after no response):**
-[Write a short follow-up in their voice — 1–2 sentences, no pressure.]
-
----
-
-After delivering the documents, say:
-"These are your CleanAIOS foundation files. Save them somewhere you can find them — you'll bring them to every session.
-
-Your next step is Session 1 with Cecilia. She'll walk you through what these documents mean for your specific business and how to start putting the system to work.
-
-See you inside CleanAIOS."
-
----
-TONE RULES
-- Always warm, never clinical
-- React to answers before asking the next question ("That's really common for solo operators." / "That tells me a lot about your positioning.")
-- Never ask two questions at once
-- If an answer is vague, gently ask for one specific example
-- Never rush — this conversation sets the tone for the entire engagement`;
-
-function toggleStep(el) {
-  const wasOpen = el.classList.contains('open');
-  document.querySelectorAll('.step').forEach(s => s.classList.remove('open'));
-  if (!wasOpen) el.classList.add('open');
+function toggleStep(id) {
+  var el = document.getElementById(id);
+  var isOpen = el.classList.contains('open');
+  document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('open'); });
+  if (!isOpen) el.classList.add('open');
 }
 
 function togglePrompt(e) {
   e.stopPropagation();
-  const box = document.getElementById('promptBox');
-  const btn = e.target;
+  var box = document.getElementById('promptBox');
+  var btn = e.target;
   if (box.classList.contains('visible')) {
     box.classList.remove('visible');
     btn.textContent = 'View Prompt';
@@ -496,7 +196,19 @@ function togglePrompt(e) {
 
 function copyPrompt(e) {
   e.stopPropagation();
-  navigator.clipboard.writeText(SYSTEM_PROMPT).then(() => {
-    const btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(SYSTEM_PROMPT).then(function() {
+    var btn = document.getElementById('copyBtn');
     btn.textContent = '✓ Copied!';
-    btn.cl
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent = 'Copy Prompt'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+// Build email at runtime
+(function(){
+  var e = document.getElementById('qs-email');
+  if(e){ var m = 'hello' + '@' + 'cleanaios.com'; e.href = 'mailto:' + m; e.textContent = m; }
+})();
+</script>
+</body>
+</html>
