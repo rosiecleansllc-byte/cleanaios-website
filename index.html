@@ -738,16 +738,29 @@ footer {
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; }
+  /* Edit banner — hide pills on mobile, single line */
+  .edit-pills { display: none; }
+  .edit-banner { padding: 8px 20px; }
+
+  /* Nav */
+  .nav { padding: 0 20px; top: 37px; height: 52px; }
+  .nav-links { display: none; }
+
+  /* Section wrap — slim banner (37px) + nav (52px) */
+  .section-wrap { padding-top: 89px; }
+
+  /* Hero */
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 52px 28px 48px; }
   .hero-right { display: none; }
+
+  /* Content sections */
   .problem-inner, .authority-inner, .programs-header { grid-template-columns: 1fr; gap: 40px; }
   .program-grid { grid-template-columns: 1fr; }
   .program-card.featured { grid-column: span 1; display: block; }
-  .program-card.featured .program-card-top { border-right: none; border-bottom: 1px solid #2a2620; }
-  .problem, .authority, .programs, .cta-section { padding: 80px 28px; }
+  .program-card.featured .program-card-top { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  .problem, .authority, .programs, .cta-section { padding: 64px 28px; }
   footer { padding: 32px 28px; flex-direction: column; align-items: flex-start; }
-  .nav { padding: 0 28px; }
-  .nav-links { display: none; }
 }
 </style>
 </head>
