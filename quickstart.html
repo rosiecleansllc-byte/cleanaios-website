@@ -14,12 +14,12 @@
   --teal-line: rgba(117,211,223,0.25);
   --ink: #0c0b09;
   --ink-soft: #1a1814;
-  --paper: #f7f4ee;
-  --cream: #ede9e0;
-  --muted: #6b6154;
+  --paper: #ffffff;
+  --cream: #f4f4f4;
+  --muted: #666666;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); color: var(--ink); }
+body { font-family: 'Instrument Sans', sans-serif; background: #ffffff; color: var(--ink); }
 
 /* HERO */
 .hero {
@@ -74,9 +74,9 @@ body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); col
 
 /* DOCS ROW */
 .docs-row {
-  background: var(--cream);
+  background: #f4f4f4;
   padding: 32px 48px;
-  border-bottom: 1px solid #ddd9d0;
+  border-bottom: 1px solid #e8e8e8;
 }
 .docs-grid {
   display: grid;
@@ -85,8 +85,8 @@ body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); col
   max-width: 680px;
 }
 .doc-card {
-  background: var(--paper);
-  border: 1px solid #ddd9d0;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
   border-top: 3px solid var(--teal);
   border-radius: 0 0 8px 8px;
   padding: 16px;
@@ -107,16 +107,16 @@ body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); col
 }
 .step {
   margin-bottom: 16px;
-  border: 1px solid #ddd9d0;
+  border: 1px solid #e4e4e4;
   border-radius: 8px;
   overflow: hidden;
-  background: #faf8f4;
+  background: #fafafa;
   transition: all 0.2s;
   cursor: pointer;
 }
 .step.open {
   border-color: var(--teal);
-  background: #fff;
+  background: #ffffff;
   box-shadow: 0 4px 20px rgba(117,211,223,0.12);
 }
 .step-header {
@@ -156,9 +156,9 @@ body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); col
   padding: 20px 24px 24px;
 }
 .step.open .step-body { display: block; }
-.step-desc { font-size: 14px; color: #3a3428; line-height: 1.75; margin-bottom: 16px; }
+.step-desc { font-size: 14px; color: #333333; line-height: 1.75; margin-bottom: 16px; }
 .tip {
-  background: #f0ece4;
+  background: #f4f9fa;
   border-left: 3px solid var(--teal);
   padding: 12px 16px;
   border-radius: 0 4px 4px 0;
@@ -173,7 +173,7 @@ body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); col
   display: block;
   margin-bottom: 4px;
 }
-.tip-text { font-size: 13px; color: #5a5040; line-height: 1.6; }
+.tip-text { font-size: 13px; color: #444444; line-height: 1.6; }
 .btn-dark {
   display: inline-flex;
   align-items: center;
@@ -190,8 +190,8 @@ body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); col
 }
 .btn-outline {
   background: transparent;
-  border: 1px solid #ddd9d0;
-  color: #5a5040;
+  border: 1px solid #e4e4e4;
+  color: #444444;
   padding: 10px 20px;
   border-radius: 4px;
   font-size: 13px;
@@ -369,12 +369,12 @@ body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); col
     <div class="footer-icon">✉️</div>
     <div>
       <div class="footer-label">Questions? We're here.</div>
-      <div class="footer-link">Reach out anytime at <a href="mailto:hello&#64;cleanaios.com">hello&#64;cleanaios.com</a></div>
+      <div class="footer-link">Reach out anytime at <a href="/cdn-cgi/l/email-protection#89e1ece5e5e6afaabfbdb2eae5ece8e7e8e0e6faa7eae6e4">hello&#64;cleanaios.com</a></div>
     </div>
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const SYSTEM_PROMPT = `You are the CleanAIOS QuickStart assistant — a warm, focused onboarding guide for residential cleaning business owners.
 
 Your job is to conduct a friendly 15–20 minute interview that feels like a conversation with someone who genuinely understands the cleaning business — not a form, not a survey.
@@ -499,10 +499,4 @@ function copyPrompt(e) {
   navigator.clipboard.writeText(SYSTEM_PROMPT).then(() => {
     const btn = document.getElementById('copyBtn');
     btn.textContent = '✓ Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy Prompt'; btn.classList.remove('copied'); }, 2500);
-  });
-}
-</script>
-</body>
-</html>
+    btn.cl
