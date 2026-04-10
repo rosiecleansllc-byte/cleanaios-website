@@ -1035,10 +1035,11 @@ footer {
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Build email link at runtime (bypasses Cloudflare email protection)
+// Build email at runtime — bypasses email obfuscation
 (function(){
+  var u = 'hello', d = 'cleanaios.com';
   var e = document.getElementById('footer-email');
-  if(e){ var m = 'hello' + '@' + 'cleanaios.com'; e.href = 'mailto:' + m; e.textContent = m; }
+  if(e){ e.href = 'mailto:' + u + '@' + d; e.textContent = u + '@' + d; }
 })();
 
 // Nav scroll effect
