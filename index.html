@@ -34,49 +34,10 @@ body {
   overflow-x: hidden;
 }
 
-/* ─── EDIT BANNER ─── */
-.edit-banner {
-  background: var(--teal);
-  border-bottom: 1px solid #2a2620;
-  padding: 10px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.edit-banner-text {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.6);
-}
-.edit-pills {
-  display: flex;
-  gap: 8px;
-}
-.edit-pill {
-  font-family: 'DM Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: rgba(0,0,0,0.08);
-  border: 1px solid rgba(0,0,0,0.15);
-  color: rgba(0,0,0,0.7);
-  padding: 4px 10px;
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.edit-pill:hover { background: rgba(0,0,0,0.15); }
-
 /* ─── NAV ─── */
 .nav {
   position: fixed;
-  top: 41px;
+  top: 0;
   left: 0; right: 0;
   z-index: 90;
   background: rgba(255,255,255,0.96);
@@ -127,7 +88,7 @@ body {
 
 /* ─── SECTION WRAPPER ─── */
 .section-wrap {
-  padding-top: 101px; /* nav + edit banner */
+  padding-top: 60px;
 }
 
 /* ─── ① HERO ─── */
@@ -602,7 +563,6 @@ body {
 }
 .core-note strong { color: var(--ink); }
 
-
 /* ─── ⑥ CTA ─── */
 .cta-section {
   background: var(--teal);
@@ -740,14 +700,12 @@ footer {
 @media (max-width: 900px) {
   /* Edit banner — hide pills on mobile, single line */
   .edit-pills { display: none; }
-  .edit-banner { padding: 8px 20px; }
-
   /* Nav */
-  .nav { padding: 0 20px; top: 37px; height: 52px; }
+  .nav { padding: 0 20px; top: 0; height: 60px; }
   .nav-links { display: none; }
 
   /* Section wrap — slim banner (37px) + nav (52px) */
-  .section-wrap { padding-top: 89px; }
+  .section-wrap { padding-top: 60px; }
 
   /* Hero */
   .hero { grid-template-columns: 1fr; min-height: auto; }
@@ -765,18 +723,6 @@ footer {
 </style>
 </head>
 <body>
-
-<!-- ─── EDIT BANNER ─── -->
-<div class="edit-banner">
-  <div class="edit-banner-text">⬡ CleanAIOS · cleanaios.com</div>
-  <div class="edit-pills">
-    <a class="edit-pill" href="#hero">Hero</a>
-    <a class="edit-pill" href="#problem">Problem</a>
-    <a class="edit-pill" href="#authority">Authority</a>
-    <a class="edit-pill" href="#programs">Programs</a>
-    <a class="edit-pill" href="#cta">CTA</a>
-  </div>
-</div>
 
 <!-- ─── NAV ─── -->
 <nav class="nav" id="nav">
@@ -1049,7 +995,6 @@ footer {
 
   </div>
 </section>
-
 
 <!-- ─── ⑥ CTA ─── -->
 <section class="cta-section" id="cta">
