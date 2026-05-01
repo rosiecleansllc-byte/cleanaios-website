@@ -95,8 +95,6 @@
   textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
 
-  .char-count { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--faint); text-align: right; margin-top: 4px; }
-  .char-count.warn { color: #e07b00; }
 
   /* radio / checkbox */
   .options { display: flex; flex-direction: column; gap: 10px; }
@@ -265,7 +263,7 @@
         <label for="q_problem">What's the one thing in your business that's most broken right now — or that you keep putting off?</label>
         <p class="q-note">Be specific. This is the most important question on the form.</p>
         <textarea id="q_problem" placeholder="e.g. Leads go cold because I don't follow up fast enough. Or I have no idea if my pricing is actually covering my costs."></textarea>
-        <div class="char-count" id="cc_problem">0 / 50 minimum</div>
+
       </div>
 
       <div class="question">
@@ -322,7 +320,7 @@
   <div class="result" id="result-maybe">
     <div class="result-icon">→</div>
     <h2 class="result-title">Application received.</h2>
-    <p class="result-body">Your application is under review. Cecilia will take a look personally and be in touch within 24 hours. No action needed on your end.</p>
+    <p class="result-body">Your application is under review. We'll take a look and be in touch within 24 hours. No action needed on your end.</p>
     <a href="/" class="result-cta ghost">Back to the site</a>
   </div>
 
@@ -356,15 +354,6 @@
       group.querySelectorAll('.option-item').forEach(item => item.classList.remove('selected'));
       this.closest('.option-item').classList.add('selected');
     });
-  });
-
-  // Char count on problem field
-  const problemField = document.getElementById('q_problem');
-  const cc = document.getElementById('cc_problem');
-  problemField.addEventListener('input', () => {
-    const len = problemField.value.trim().length;
-    cc.textContent = len + ' / 50 minimum';
-    cc.className = 'char-count' + (len < 50 && len > 0 ? ' warn' : '');
   });
 
   function getStepData(step) {
@@ -409,7 +398,7 @@
       if (!d.setup) { alert('Please select your current setup.'); return false; }
     }
     if (step === 3) {
-      if (d.problem.length < 50) { alert('Please tell us more about what\'s most broken — at least a sentence or two.'); return false; }
+      if (!d.problem) { alert('Please tell us what\'s most broken in your business right now.'); return false; }
     }
     if (step === 4) {
       if (!d.reason) { alert('Please select your honest reason for applying.'); return false; }
