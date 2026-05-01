@@ -1,9 +1,10 @@
 {
   "outputDirectory": ".",
-  "rewrites": [
+  "redirects": [
     {
       "source": "/quickstart",
-      "destination": "/quickstart.html"
+      "destination": "/apply",
+      "permanent": false
     }
   ]
 }
