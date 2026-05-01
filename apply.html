@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply — Clean AIOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #75D3DF;
+    --ink: #111111;
+    --ink-soft: #1A1A1A;
+    --muted: #555555;
+    --faint: #888888;
+    --cream: #F5F5F5;
+    --border: #E0E0E0;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    color: var(--ink);
+    background: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 17px; color: var(--ink); text-decoration: none; }
+  .nav-brand span { color: var(--teal); }
+  .nav-back { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--faint); text-decoration: none; letter-spacing: 0.05em; }
+  .nav-back:hover { color: var(--ink); }
+
+  /* ── MAIN ── */
+  main { flex: 1; padding: 64px 24px 80px; max-width: 640px; margin: 0 auto; width: 100%; }
+
+  .page-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--faint); margin-bottom: 16px;
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 500;
+    line-height: 1.1; color: var(--ink); margin-bottom: 16px;
+  }
+  .page-sub {
+    font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 48px;
+    border-bottom: 1px solid var(--border); padding-bottom: 40px;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap { display: flex; gap: 8px; margin-bottom: 40px; }
+  .progress-step {
+    height: 3px; flex: 1; background: var(--border); border-radius: 2px;
+    transition: background 0.3s;
+  }
+  .progress-step.active { background: var(--teal); }
+  .progress-step.done { background: var(--ink); }
+
+  /* ── STEP ── */
+  .step { display: none; }
+  .step.visible { display: block; }
+
+  .step-label {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 24px;
+  }
+  .question { margin-bottom: 28px; }
+  .question label {
+    display: block; font-size: 15px; font-weight: 500; color: var(--ink);
+    margin-bottom: 8px; line-height: 1.5;
+  }
+  .question .q-note { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+
+  input[type="text"], input[type="email"], textarea, select {
+    width: 100%; border: 1px solid var(--border); border-radius: 4px;
+    padding: 12px 14px; font-family: 'Instrument Sans', sans-serif; font-size: 15px;
+    color: var(--ink); background: #fff; transition: border-color 0.2s;
+    outline: none;
+  }
+  input[type="text"]:focus, input[type="email"]:focus, textarea:focus, select:focus {
+    border-color: var(--teal);
+  }
+  textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+  select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+
+  .char-count { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--faint); text-align: right; margin-top: 4px; }
+  .char-count.warn { color: #e07b00; }
+
+  /* radio / checkbox */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-item {
+    display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px;
+    border: 1px solid var(--border); border-radius: 4px; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .option-item:hover { border-color: var(--teal); background: #f7fdfe; }
+  .option-item.selected { border-color: var(--teal); background: #f0fbfc; }
+  .option-item input[type="radio"], .option-item input[type="checkbox"] {
+    width: auto; margin-top: 2px; accent-color: var(--teal); flex-shrink: 0;
+  }
+  .option-label { font-size: 15px; color: var(--ink); line-height: 1.5; }
+
+  /* ── BUTTONS ── */
+  .btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+  .btn-next {
+    background: var(--ink); color: #fff; border: none; border-radius: 4px;
+    padding: 14px 28px; font-family: 'Instrument Sans', sans-serif; font-weight: 600;
+    font-size: 14px; cursor: pointer; transition: background 0.2s; letter-spacing: 0.02em;
+  }
+  .btn-next:hover { background: #333; }
+  .btn-next:disabled { background: var(--border); color: var(--faint); cursor: not-allowed; }
+  .btn-back {
+    background: none; border: none; font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--faint); cursor: pointer; letter-spacing: 0.05em; padding: 0;
+  }
+  .btn-back:hover { color: var(--ink); }
+
+  /* ── RESULT PAGES ── */
+  .result { display: none; text-align: center; padding: 40px 0; }
+  .result.visible { display: block; }
+  .result-icon { font-size: 40px; margin-bottom: 24px; }
+  .result-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 500;
+    color: var(--ink); margin-bottom: 16px; line-height: 1.2;
+  }
+  .result-body { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 480px; margin: 0 auto 32px; }
+  .result-cta {
+    display: inline-block; background: var(--ink); color: #fff; text-decoration: none;
+    padding: 14px 28px; border-radius: 4px; font-weight: 600; font-size: 14px;
+    transition: background 0.2s;
+  }
+  .result-cta:hover { background: #333; }
+  .result-cta.ghost {
+    background: none; border: 1px solid var(--border); color: var(--muted); margin-left: 12px;
+  }
+  .result-cta.ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* submitting state */
+  .submitting-msg { text-align: center; padding: 60px 0; }
+  .submitting-msg p { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--faint); letter-spacing: 0.1em; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border); padding: 28px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-brand { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14px; color: var(--ink); }
+  .footer-brand span { color: var(--teal); }
+  .footer-links { list-style: none; display: flex; gap: 24px; }
+  .footer-links a { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--faint); text-decoration: none; }
+  .footer-links a:hover { color: var(--ink); }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 20px; }
+    main { padding: 40px 20px 60px; }
+    .page-title { font-size: 32px; }
+    footer { flex-direction: column; gap: 16px; padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">Clean<span>AIOS</span></a>
+  <a href="/" class="nav-back">← back to site</a>
+</nav>
+
+<main>
+  <div id="form-wrap">
+    <div class="page-eyebrow">Application</div>
+    <h1 class="page-title">Find your starting point.</h1>
+    <p class="page-sub">Three minutes. A few honest questions about where you are and where you want to go. The answers tell us which program fits — and whether now is the right time.</p>
+
+    <div class="progress-wrap" id="progress">
+      <div class="progress-step active" id="p1"></div>
+      <div class="progress-step" id="p2"></div>
+      <div class="progress-step" id="p3"></div>
+      <div class="progress-step" id="p4"></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step visible" id="step-1">
+      <div class="step-label">Step 1 of 4 — About your business</div>
+
+      <div class="question">
+        <label for="q_name">Your name</label>
+        <input type="text" id="q_name" placeholder="First and last name">
+      </div>
+
+      <div class="question">
+        <label for="q_email">Your email</label>
+        <input type="email" id="q_email" placeholder="hello@yourbusiness.com">
+      </div>
+
+      <div class="question">
+        <label for="q_business">Business name</label>
+        <input type="text" id="q_business" placeholder="Your cleaning company name">
+      </div>
+
+      <div class="question">
+        <label for="q_revenue">Roughly how much revenue did your business do last month?</label>
+        <select id="q_revenue">
+          <option value="">Select a range</option>
+          <option value="under2k">Under $2,000</option>
+          <option value="2k5k">$2,000 – $5,000</option>
+          <option value="5k10k">$5,000 – $10,000</option>
+          <option value="10k25k">$10,000 – $25,000</option>
+          <option value="25k50k">$25,000 – $50,000</option>
+          <option value="over50k">Over $50,000</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <span></span>
+        <button class="btn-next" onclick="nextStep(1)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step" id="step-2">
+      <div class="step-label">Step 2 of 4 — Your operation</div>
+
+      <div class="question">
+        <label>How long have you been running your cleaning business?</label>
+        <div class="options" id="q_years">
+          <label class="option-item"><input type="radio" name="years" value="under1"> <span class="option-label">Less than a year</span></label>
+          <label class="option-item"><input type="radio" name="years" value="1to2"> <span class="option-label">1 – 2 years</span></label>
+          <label class="option-item"><input type="radio" name="years" value="2to5"> <span class="option-label">2 – 5 years</span></label>
+          <label class="option-item"><input type="radio" name="years" value="over5"> <span class="option-label">More than 5 years</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label>Which best describes your current setup?</label>
+        <div class="options" id="q_setup">
+          <label class="option-item"><input type="radio" name="setup" value="solo_cleaning"> <span class="option-label">I'm cleaning myself — solo or with occasional help</span></label>
+          <label class="option-item"><input type="radio" name="setup" value="small_crew"> <span class="option-label">I have a small crew (1–3 people) and manage operations</span></label>
+          <label class="option-item"><input type="radio" name="setup" value="growing_team"> <span class="option-label">I have a team (4+) and I'm focused on growth and systems</span></label>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" onclick="prevStep(2)">← back</button>
+        <button class="btn-next" onclick="nextStep(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step" id="step-3">
+      <div class="step-label">Step 3 of 4 — The real stuff</div>
+
+      <div class="question">
+        <label for="q_problem">What's the one thing in your business that's most broken right now — or that you keep putting off?</label>
+        <p class="q-note">Be specific. This is the most important question on the form.</p>
+        <textarea id="q_problem" placeholder="e.g. Leads go cold because I don't follow up fast enough. Or I have no idea if my pricing is actually covering my costs."></textarea>
+        <div class="char-count" id="cc_problem">0 / 50 minimum</div>
+      </div>
+
+      <div class="question">
+        <label for="q_tried">Have you tried to fix this before? What happened?</label>
+        <textarea id="q_tried" placeholder="e.g. I tried setting up a CRM but never kept up with it. Or I've been meaning to figure out my pricing for months."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" onclick="prevStep(3)">← back</button>
+        <button class="btn-next" onclick="nextStep(3)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step" id="step-4">
+      <div class="step-label">Step 4 of 4 — Fit check</div>
+
+      <div class="question">
+        <label>What's your honest reason for applying right now?</label>
+        <div class="options" id="q_reason">
+          <label class="option-item"><input type="radio" name="reason" value="ready_build"> <span class="option-label">I'm ready to build — I implement when I find the right system</span></label>
+          <label class="option-item"><input type="radio" name="reason" value="researching"> <span class="option-label">I'm still researching and figuring out if this is the right move</span></label>
+          <label class="option-item"><input type="radio" name="reason" value="urgent"> <span class="option-label">Something specific is broken and I need to fix it now</span></label>
+          <label class="option-item"><input type="radio" name="reason" value="curious"> <span class="option-label">I'm curious about AI for my business but not sure where to start</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <label for="q_goal">Where do you want the business to be 12 months from now?</label>
+        <textarea id="q_goal" placeholder="Revenue goal, team size, what you want your day-to-day to look like — whatever matters most to you."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" onclick="prevStep(4)">← back</button>
+        <button class="btn-next" id="submit-btn" onclick="submitForm()">Submit application →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMITTING -->
+  <div class="submitting-msg" id="submitting" style="display:none">
+    <p>REVIEWING YOUR APPLICATION...</p>
+  </div>
+
+  <!-- RESULT: YES -->
+  <div class="result" id="result-yes">
+    <div class="result-icon">✓</div>
+    <h2 class="result-title">You're confirmed.</h2>
+    <p class="result-body">Your application came through and you're a fit. Check your email — a confirmation is on its way with everything you need to prepare for your discovery call.</p>
+    <a href="https://calendly.com/cleanaios" class="result-cta" target="_blank">Book your discovery call →</a>
+  </div>
+
+  <!-- RESULT: MAYBE -->
+  <div class="result" id="result-maybe">
+    <div class="result-icon">→</div>
+    <h2 class="result-title">Application received.</h2>
+    <p class="result-body">Your application is under review. Cecilia will take a look personally and be in touch within 24 hours. No action needed on your end.</p>
+    <a href="/" class="result-cta ghost">Back to the site</a>
+  </div>
+
+  <!-- RESULT: NO -->
+  <div class="result" id="result-no">
+    <div class="result-icon">→</div>
+    <h2 class="result-title">Not the right fit right now.</h2>
+    <p class="result-body">Based on where you are, the live programs aren't the right move yet. The DIY Toolkit gives you the same core tools — templates, the Margin Stabilization Plugin, step-by-step implementation guide — to build at your own pace.</p>
+    <a href="https://gumroad.com/cleanaios" class="result-cta" target="_blank">Explore the DIY Toolkit →</a>
+    <a href="/" class="result-cta ghost">Back to the site</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-brand">Clean<span>AIOS</span></div>
+  <ul class="footer-links">
+    <li><a href="mailto:hello@cleanaios.com">hello@cleanaios.com</a></li>
+    <li><a href="/">cleanaios.com</a></li>
+  </ul>
+</footer>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 4;
+
+  // Sync radio option visual state
+  document.querySelectorAll('.option-item input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      const group = this.closest('.options');
+      group.querySelectorAll('.option-item').forEach(item => item.classList.remove('selected'));
+      this.closest('.option-item').classList.add('selected');
+    });
+  });
+
+  // Char count on problem field
+  const problemField = document.getElementById('q_problem');
+  const cc = document.getElementById('cc_problem');
+  problemField.addEventListener('input', () => {
+    const len = problemField.value.trim().length;
+    cc.textContent = len + ' / 50 minimum';
+    cc.className = 'char-count' + (len < 50 && len > 0 ? ' warn' : '');
+  });
+
+  function getStepData(step) {
+    if (step === 1) {
+      return {
+        name: document.getElementById('q_name').value.trim(),
+        email: document.getElementById('q_email').value.trim(),
+        business: document.getElementById('q_business').value.trim(),
+        revenue: document.getElementById('q_revenue').value,
+      };
+    }
+    if (step === 2) {
+      return {
+        years: document.querySelector('input[name="years"]:checked')?.value,
+        setup: document.querySelector('input[name="setup"]:checked')?.value,
+      };
+    }
+    if (step === 3) {
+      return {
+        problem: document.getElementById('q_problem').value.trim(),
+        tried: document.getElementById('q_tried').value.trim(),
+      };
+    }
+    if (step === 4) {
+      return {
+        reason: document.querySelector('input[name="reason"]:checked')?.value,
+        goal: document.getElementById('q_goal').value.trim(),
+      };
+    }
+  }
+
+  function validateStep(step) {
+    const d = getStepData(step);
+    if (step === 1) {
+      if (!d.name) { alert('Please enter your name.'); return false; }
+      if (!d.email || !d.email.includes('@')) { alert('Please enter a valid email.'); return false; }
+      if (!d.business) { alert('Please enter your business name.'); return false; }
+      if (!d.revenue) { alert('Please select a revenue range.'); return false; }
+    }
+    if (step === 2) {
+      if (!d.years) { alert('Please select how long you\'ve been in business.'); return false; }
+      if (!d.setup) { alert('Please select your current setup.'); return false; }
+    }
+    if (step === 3) {
+      if (d.problem.length < 50) { alert('Please tell us more about what\'s most broken — at least a sentence or two.'); return false; }
+    }
+    if (step === 4) {
+      if (!d.reason) { alert('Please select your honest reason for applying.'); return false; }
+      if (!d.goal) { alert('Please share where you want the business to be in 12 months.'); return false; }
+    }
+    return true;
+  }
+
+  function updateProgress(step) {
+    for (let i = 1; i <= totalSteps; i++) {
+      const el = document.getElementById('p' + i);
+      if (i < step) el.className = 'progress-step done';
+      else if (i === step) el.className = 'progress-step active';
+      else el.className = 'progress-step';
+    }
+  }
+
+  function nextStep(fromStep) {
+    if (!validateStep(fromStep)) return;
+    document.getElementById('step-' + fromStep).classList.remove('visible');
+    currentStep = fromStep + 1;
+    document.getElementById('step-' + currentStep).classList.add('visible');
+    updateProgress(currentStep);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function prevStep(fromStep) {
+    document.getElementById('step-' + fromStep).classList.remove('visible');
+    currentStep = fromStep - 1;
+    document.getElementById('step-' + currentStep).classList.add('visible');
+    updateProgress(currentStep);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  async function submitForm() {
+    if (!validateStep(4)) return;
+
+    const payload = {
+      ...getStepData(1),
+      ...getStepData(2),
+      ...getStepData(3),
+      ...getStepData(4),
+    };
+
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('submitting').style.display = 'block';
+
+    try {
+      const res = await fetch('/api/submit-application', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      document.getElementById('submitting').style.display = 'none';
+      const outcome = data.outcome || 'maybe';
+      document.getElementById('result-' + outcome).classList.add('visible');
+    } catch (err) {
+      // Fallback to maybe on error
+      document.getElementById('submitting').style.display = 'none';
+      document.getElementById('result-maybe').classList.add('visible');
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
