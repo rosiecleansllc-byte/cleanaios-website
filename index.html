@@ -724,7 +724,9 @@ footer {
   /* Content sections */
   .problem-inner, .authority-inner, .programs-header { grid-template-columns: 1fr; gap: 40px; }
   .program-grid { grid-template-columns: 1fr; }
-  .program-card.featured { grid-column: span 1; display: block; }
+  .program-card.featured { grid-column: span 1 !important; display: block !important; }
+  .program-card.featured .program-card-top { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.12) !important; padding: 28px 24px !important; }
+  .program-card.featured .program-card-body { padding: 24px !important; }
   .program-card.featured .program-card-top { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); }
   .program-card.featured .program-card-top { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.1); }
   .problem, .authority, .programs, .cta-section { padding: 64px 28px; }
