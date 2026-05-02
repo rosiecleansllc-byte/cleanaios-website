@@ -728,6 +728,27 @@ footer {
   .problem, .authority, .programs, .cta-section { padding: 64px 28px; }
   footer { padding: 32px 28px; flex-direction: column; align-items: flex-start; }
 }
+
+      .stage-label {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 56px;
+        margin-bottom: 24px;
+      }
+      .stage-label-text {
+        font-family: 'DM Mono', monospace;
+        font-size: 9px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--faint);
+        white-space: nowrap;
+      }
+      .stage-label-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
 </style>
 </head>
 <body>
@@ -797,7 +818,7 @@ footer {
   <div class="problem-inner">
     <div class="problem-left reveal">
       <div class="sec-eyebrow">The Problem</div>
-      <h2 class="sec-h2">Your business only runs<br>when you do.</h2>
+      <h2 class="sec-h2">Your business only runs<br>when <em>you do.</em></h2>
 
       <!-- ✏️ EDIT: Body copy — adjust tone if needed -->
       <p class="sec-body">The business works — but only because you never stop working.</p>
@@ -817,13 +838,7 @@ footer {
             <div class="pain-sub">You know what you charge, roughly what it costs, and what your best client looks like — but none of it is written down. The business runs on your memory, not a system. That works until it doesn't.</div>
           </div>
         </li>
-        <li class="pain-item">
-          <div class="pain-icon">›</div>
-          <div class="pain-text">
-            <div class="pain-head">Leads go cold after hours</div>
-            <div class="pain-sub">You're managing a crew, handling a client issue, driving between jobs. A lead fills out your form. By the time you see it, they've already booked someone else.</div>
-          </div>
-        </li>
+
         <li class="pain-item">
           <div class="pain-icon">›</div>
           <div class="pain-text">
@@ -903,9 +918,12 @@ footer {
       </div>
     </div>
 
-    <div class="program-grid">
-
-      <!-- FOUNDATIONS TRACK -->
+    <!-- STAGE 01 · BUILDING -->
+    <div class="stage-label">
+      <div class="stage-label-text">Stage 01 · Building</div>
+      <div class="stage-label-line"></div>
+    </div>
+    <div class="program-grid" style="grid-template-columns:1fr; margin-bottom:0;">
       <div class="program-card">
         <div class="program-card-top">
           <div class="program-tag program-tag-reset">The Reset · Fully Live</div>
@@ -922,8 +940,14 @@ footer {
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- STANDALONE 1 -->
+    <!-- STAGE 02 · GROWING -->
+    <div class="stage-label">
+      <div class="stage-label-text">Stage 02 · Growing</div>
+      <div class="stage-label-line"></div>
+    </div>
+    <div class="program-grid">
       <div class="program-card">
         <div class="program-card-top">
           <div class="program-tag">Entry Point 01 · Hybrid Delivery</div>
@@ -941,12 +965,10 @@ footer {
           </div>
         </div>
       </div>
-
-      <!-- STANDALONE 2 -->
       <div class="program-card">
         <div class="program-card-top">
           <div class="program-tag">Entry Point 02 · Hybrid Delivery</div>
-          <div class="program-name">Financial Clarity & Pricing Confidence</div>
+          <div class="program-name">Financial Clarity &amp; Pricing Confidence</div>
           <div class="program-tagline">Know your real numbers. Charge what the business needs. Stop guessing.</div>
         </div>
         <div class="program-card-body">
@@ -960,53 +982,53 @@ footer {
           </div>
         </div>
       </div>
-
-      <!-- STANDALONE 3 -->
       <div class="program-card">
         <div class="program-card-top">
-          <div class="program-tag">Entry Point 03 · Fully Live</div>
+          <div class="program-tag">Entry Point 03 · Hybrid Delivery</div>
           <div class="program-name">Competitive Positioning</div>
           <div class="program-tagline">Know your market. Own your lane. Attract the clients who never ask about price.</div>
         </div>
         <div class="program-card-body">
           <div class="program-detail"><span class="pd-dot">›</span>Full local market competitive analysis</div>
           <div class="program-detail"><span class="pd-dot">›</span>Upper-tier client profile for your specific market</div>
-          <div class="program-detail"><span class="pd-dot">›</span>Positioning statement + updated website copy</div>
-          <div class="program-detail"><span class="pd-dot">›</span>Google Business Profile rewritten to attract the right client</div>
+          <div class="program-detail"><span class="pd-dot">›</span>Positioning statement that separates you from the field</div>
+          <div class="program-detail"><span class="pd-dot">›</span>Updated website copy and Google Business Profile language</div>
           <div class="program-meta">
-            <div class="program-sessions">3 live 1:1 sessions + bonus · fully live · ~30 days<br><em style="font-size:0.85em;opacity:0.75">Cecilia's real-time interpretation of your market is the product.</em></div>
+            <div class="program-sessions">3 live 1:1 sessions · async modules · ~30 days</div>
             <a href="https://calendly.com/cleanaios" class="program-link" target="_blank">Get started →</a>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- CORE PROGRAM FEATURED -->
-      <div class="program-card featured">
+    <!-- STAGE 03 · SCALE -->
+    <div class="stage-label">
+      <div class="stage-label-text">Stage 03 · Scale</div>
+      <div class="stage-label-line"></div>
+    </div>
+    <div class="program-grid" style="grid-template-columns:1fr; margin-bottom:0;">
+      <div class="program-card featured" style="grid-template-columns:1fr 1fr;">
         <div class="program-card-top">
           <div class="program-tag">The Full Build · Hybrid Delivery</div>
-          <div class="program-name">CleanAIOS Core Program</div>
+          <div class="program-name">Clean AIOS Core Program</div>
           <div class="program-tagline">Build the complete system. Seven modules that take you from scattered and reactive to proactively running a complete AI-powered operation — built, tested, and running in your actual business.</div>
         </div>
         <div class="program-card-body">
-          <div class="program-detail"><span class="pd-dot">›</span>Live intake + follow-up system built and tested</div>
-          <div class="program-detail"><span class="pd-dot">›</span>After-hours lead coverage — automated, in your voice</div>
-          <div class="program-detail"><span class="pd-dot">›</span>Personal prompt card saved in your Claude project</div>
-          <div class="program-detail"><span class="pd-dot">›</span>Simple tracking dashboard you'll actually use</div>
-          <div class="program-detail"><span class="pd-dot">›</span>90-day action plan for what comes next</div>
-          <div class="program-detail" style="margin-top:12px;opacity:0.85"><em>Standalones are live and enrolling — and every standalone graduates naturally into the Core Program once it opens.</em></div>
+          <div class="program-detail"><span class="pd-dot">›</span>Complete AI-powered lead intake and follow-up system</div>
+          <div class="program-detail"><span class="pd-dot">›</span>Full automation roadmap — Phase 1 through Phase 3</div>
+          <div class="program-detail"><span class="pd-dot">›</span>VA + AI hybrid model if you're ready to hire</div>
+          <div class="program-detail"><span class="pd-dot">›</span>Measurement dashboard — the 4 numbers that matter</div>
+          <div class="program-detail"><span class="pd-dot">›</span>90-day growth plan with clear next steps</div>
           <div class="program-meta">
-            <div class="program-sessions" style="color:rgba(0,0,0,0.45)">5 hybrid modules · Natural graduation from any standalone</div>
-            <a href="mailto:hello@cleanaios.com?subject=Core%20Program%20Waitlist" class="program-link" style="color:var(--teal-light); border-color:rgba(117,211,223,0.3)">Join the Waitlist →</a>
+            <div class="program-sessions">7 modules · live + async · ~60 days</div>
+            <a href="/apply" class="program-link">Apply now →</a>
           </div>
         </div>
       </div>
-
-    </div><!-- /program-grid -->
-
-<div class="core-note">
-      <span>⬡</span>
-      <span><strong>Founding cohort now open.</strong> First cohort only — same program at a founding rate. Core Program waitlist open. Discovery call is always free.</span>
     </div>
+
+
+
 
   </div>
 </section>
