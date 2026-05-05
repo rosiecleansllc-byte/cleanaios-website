@@ -5,9 +5,8 @@
       @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&amp;family=Instrument+Sans:wght@400&amp;display=swap');
     </style>
   </defs>
-  <!-- Top double rule -->
-  <line x1="40" y1="20" x2="560" y2="20" stroke="#75d3df" stroke-width="2.2"/>
-  <line x1="40" y1="29" x2="560" y2="29" stroke="#75d3df" stroke-width="1"/>
+  <!-- Top single rule -->
+  <line x1="40" y1="24" x2="560" y2="24" stroke="#75d3df" stroke-width="1.5"/>
   <!-- Clean AiOS -->
   <text x="300" y="148" text-anchor="middle"
     font-family="'Cormorant Garamond', Georgia, serif"
