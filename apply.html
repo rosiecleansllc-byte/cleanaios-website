@@ -38,8 +38,11 @@
     height: 64px;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .nav-brand { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 17px; color: var(--ink); text-decoration: none; }
-  .nav-brand span { color: var(--teal); }
+  .nav-brand { display: inline-flex; flex-direction: column; align-items: center; text-decoration: none; gap: 3px; }
+  .nav-brand-main { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 20px; color: var(--ink); letter-spacing: 0.02em; line-height: 1; }
+  .nav-brand-main span { color: var(--teal); }
+  .nav-brand-sub { font-family: 'Instrument Sans', sans-serif; font-size: 7.5px; letter-spacing: 0.24em; color: var(--muted); display: flex; align-items: center; gap: 6px; width: 100%; line-height: 1; }
+  .nav-brand-sub::before, .nav-brand-sub::after { content: ''; flex: 1; height: 1px; background: var(--teal); }
   .nav-back { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--faint); text-decoration: none; letter-spacing: 0.05em; }
   .nav-back:hover { color: var(--ink); }
 
@@ -154,8 +157,11 @@
     border-top: 1px solid var(--border); padding: 28px 40px;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .footer-brand { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14px; color: var(--ink); }
-  .footer-brand span { color: var(--teal); }
+  .footer-brand { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; }
+  .footer-brand-main { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 16px; color: var(--ink); line-height: 1; }
+  .footer-brand-main span { color: var(--teal); }
+  .footer-brand-sub { font-family: 'Instrument Sans', sans-serif; font-size: 7px; letter-spacing: 0.22em; color: var(--faint); display: flex; align-items: center; gap: 5px; width: 100%; line-height: 1; }
+  .footer-brand-sub::before, .footer-brand-sub::after { content: ''; flex: 1; height: 1px; background: var(--teal); opacity: 0.6; }
   .footer-links { list-style: none; display: flex; gap: 24px; }
   .footer-links a { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--faint); text-decoration: none; }
   .footer-links a:hover { color: var(--ink); }
@@ -171,7 +177,10 @@
 <body>
 
 <nav>
-  <a href="/" class="nav-brand">Clean<span>AIOS</span></a>
+  <a href="/" class="nav-brand">
+    <span class="nav-brand-main">Clean <span>AiOS</span></span>
+    <span class="nav-brand-sub">ADVISORY</span>
+  </a>
   <a href="/" class="nav-back">← back to site</a>
 </nav>
 
@@ -336,7 +345,10 @@
 </main>
 
 <footer>
-  <div class="footer-brand">Clean<span>AIOS</span></div>
+  <div class="footer-brand">
+    <div class="footer-brand-main">Clean <span>AiOS</span></div>
+    <div class="footer-brand-sub">ADVISORY</div>
+  </div>
   <ul class="footer-links">
     <li><a href="mailto:hello@cleanaios.com">hello@cleanaios.com</a></li>
     <li><a href="/">cleanaios.com</a></li>
